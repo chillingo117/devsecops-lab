@@ -34,29 +34,29 @@ public class StudentDetailsApi extends ActionSupport implements ServletResponseA
 	private String userName;
 
 //	@Action(value = "/api/user")
-	public String execute() throws Exception {
-		System.out.println("Inside Student Get");
-		ServletInputStream xmlString = servletRequest.getInputStream();
-		BufferedInputStream bis = new BufferedInputStream(xmlString);
-		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-		DocumentBuilder db = dbf.newDocumentBuilder();
-		InputSource is = new InputSource();
-		is.setByteStream(xmlString);
-		Document doc = db.parse(is);
-		NodeList nodes = doc.getElementsByTagName("user");
-		Element element = (Element) nodes.item(0);
-		NodeList name = element.getElementsByTagName("username");
-		Element line = (Element) name.item(0);
-		String userName = getCharacterDataFromElement(line);
-		System.out.println(userName);
-		StudentService studentService = new StudentService();
-		Student student = studentService.fetchUserDetails(userName);
-		System.out.println(student.getEmailAddress());
-		String outPutXML=jaxbObjectToXML(student);
-		PrintWriter printWriter = servletResponse.getWriter();
-		printWriter.print(outPutXML);
-		return NONE;
-	}
+	// public String execute() throws Exception {
+	// 	System.out.println("Inside Student Get");
+	// 	ServletInputStream xmlString = servletRequest.getInputStream();
+	// 	BufferedInputStream bis = new BufferedInputStream(xmlString);
+	// 	DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+	// 	DocumentBuilder db = dbf.newDocumentBuilder();
+	// 	InputSource is = new InputSource();
+	// 	is.setByteStream(xmlString);
+	// 	Document doc = db.parse(is);
+	// 	NodeList nodes = doc.getElementsByTagName("user");
+	// 	Element element = (Element) nodes.item(0);
+	// 	NodeList name = element.getElementsByTagName("username");
+	// 	Element line = (Element) name.item(0);
+	// 	String userName = getCharacterDataFromElement(line);
+	// 	System.out.println(userName);
+	// 	StudentService studentService = new StudentService();
+	// 	Student student = studentService.fetchUserDetails(userName);
+	// 	System.out.println(student.getEmailAddress());
+	// 	String outPutXML=jaxbObjectToXML(student);
+	// 	PrintWriter printWriter = servletResponse.getWriter();
+	// 	printWriter.print(outPutXML);
+	// 	return NONE;
+	// }
 
 	@Override
 	public void setServletRequest(HttpServletRequest request) {
